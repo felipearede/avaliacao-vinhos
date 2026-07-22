@@ -82,12 +82,15 @@
     border-radius: 12px; padding: 12px 20px; margin-bottom: 14px;
     font-weight: 700; font-size: 1.05rem; text-align: center;
   }
-  td.qtd { text-align: center; }
+  td.qtd { text-align: center; min-width: 120px; }
   td.qtd input {
     width: 70px; font-size: 1.1rem; font-weight: 700; padding: 8px 4px;
     border-radius: 8px; border: 2px solid var(--verde); background: var(--bg);
     color: var(--text); text-align: center;
   }
+  .subtotal { margin-top: 6px; font-size: .85rem; font-weight: 700; color: var(--destaque); }
+  .subtotal .lo { display: block; font-weight: 400; font-size: .76rem; color: var(--muted); }
+  .subtotal .zero { color: var(--muted); font-weight: 400; font-size: .78rem; }
   .rodape ul { margin: 6px 0 14px; padding-left: 20px; }
   a { color: inherit; }
 </style>
@@ -537,6 +540,9 @@ document.addEventListener('DOMContentLoaded', function () {
     try { saved = localStorage.getItem('vinhos-qtd-' + i); } catch (e) {}
     inp.value = saved !== null ? saved : '1';
     td.appendChild(inp);
+    var sub = document.createElement('div');
+    sub.className = 'subtotal';
+    td.appendChild(sub);
     r.appendChild(td);
     inp.addEventListener('input', function () {
       try { localStorage.setItem('vinhos-qtd-' + i, inp.value); } catch (e) {}
@@ -546,7 +552,8 @@ document.addEventListener('DOMContentLoaded', function () {
       novo: parse(vals[0].textContent),
       meu: parse(vals[1].textContent),
       leilao: parse(vals[2].textContent),
-      inp: inp
+      inp: inp,
+      sub: sub
     };
   });
   function calc() {
@@ -557,6 +564,12 @@ document.addEventListener('DOMContentLoaded', function () {
         t[k][0] += d[k][0] * q;
         t[k][1] += d[k][1] * q;
       });
+      if (q === 0) {
+        d.sub.innerHTML = '<span class="zero">fora da conta</span>';
+      } else {
+        d.sub.innerHTML = fmt(d.meu[0] * q) + ' a ' + fmt(d.meu[1] * q) +
+          '<span class="lo">leilão: ' + fmt(d.leilao[0] * q) + ' a ' + fmt(d.leilao[1] * q) + '</span>';
+      }
     });
     nums[0].textContent = fmt(t.meu[0]) + ' a ' + fmt(t.meu[1]);
     nums[1].textContent = fmt(t.leilao[0]) + ' a ' + fmt(t.leilao[1]);
