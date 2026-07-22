@@ -82,6 +82,12 @@
     border-radius: 12px; padding: 12px 20px; margin-bottom: 14px;
     font-weight: 700; font-size: 1.05rem; text-align: center;
   }
+  td.qtd { text-align: center; }
+  td.qtd input {
+    width: 70px; font-size: 1.1rem; font-weight: 700; padding: 8px 4px;
+    border-radius: 8px; border: 2px solid var(--verde); background: var(--bg);
+    color: var(--text); text-align: center;
+  }
   .rodape ul { margin: 6px 0 14px; padding-left: 20px; }
   a { color: inherit; }
 </style>
@@ -93,9 +99,9 @@
 <p class="sub">57 fotos analisadas · ~53 garrafas identificadas · preços pesquisados em 22/07/2026 (leilões, Wine-Searcher, Catawiki, Mercado Livre, garrafeiras)</p>
 
 <div class="cards">
-  <div class="card"><div class="num">≈ R$ 4.200 a 9.400</div><div class="lbl">💰 NO ESTADO ATUAL, contando 1 garrafa de cada rótulo. Tem mais de uma de algum? Multiplique o valor unitário dele</div></div>
-  <div class="card"><div class="num">≈ R$ 6.500 a 15.000</div><div class="lbl">🔨 VENDENDO EM LEILÃO (1 de cada): teto se cada peça for bem anunciada e alcançar o máximo. Na prática, espere algo entre o estado atual e este teto</div></div>
-  <div class="card"><div class="num">≈ R$ 2.900 a 4.600</div><div class="lbl">🛒 COMPRAR TUDO NOVO HOJE (1 de cada): soma dos equivalentes atuais em loja. Marcas extintas (Duvalier, Bergerac, garrafão de palha etc.) não entram, não têm versão nova</div></div>
+  <div class="card"><div class="num">≈ R$ 4.200 a 9.400</div><div class="lbl">💰 NO ESTADO ATUAL, com as quantidades que você preencher na coluna "Qtde" da tabela (começa com 1 de cada)</div></div>
+  <div class="card"><div class="num">≈ R$ 6.500 a 15.000</div><div class="lbl">🔨 VENDENDO EM LEILÃO: teto se cada peça for bem anunciada e alcançar o máximo, com as suas quantidades. Na prática, espere algo entre o estado atual e este teto</div></div>
+  <div class="card"><div class="num">≈ R$ 2.900 a 4.600</div><div class="lbl">🛒 COMPRAR TUDO NOVO HOJE, com as suas quantidades. Marcas extintas (Duvalier, Bergerac, garrafão de palha etc.) não entram, não têm versão nova</div></div>
   <div class="card"><div class="num">Cousiño Macul 1975</div><div class="lbl">🏆 Rótulo mais valioso: R$ 250 a 550 no estado atual, teto de leilão R$ 900</div></div>
 </div>
 
@@ -110,7 +116,7 @@
   </ul>
 </div>
 
-<div class="banner">⚠️ Todos os preços da tabela valem para 1 GARRAFA. Tem 2, 3 ou 10 garrafas de um rótulo? Multiplique o valor por essa quantidade.</div>
+<div class="banner">⚠️ Todos os preços valem para 1 GARRAFA. Preencha a coluna "Qtde que tenho" com quantas você tem de cada: os totais lá em cima atualizam sozinhos (e ficam salvos no seu navegador).</div>
 
 <div class="tblbox">
 <table>
@@ -503,5 +509,61 @@
 </div>
 
 </div>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var parse = function (txt) {
+    var m = txt.replace(/\./g, '').match(/R\$ ?(\d+)[–-](\d+)/);
+    return m ? [parseInt(m[1], 10), parseInt(m[2], 10)] : [0, 0];
+  };
+  var fmt = function (n) { return 'R$ ' + Math.round(n).toLocaleString('pt-BR'); };
+  var headRow = document.querySelector('thead tr');
+  var th = document.createElement('th');
+  th.innerHTML = 'Qtde<br>que tenho';
+  headRow.appendChild(th);
+  document.querySelectorAll('tr.sec td').forEach(function (td) { td.colSpan = 7; });
+  var nums = document.querySelectorAll('.cards .card .num');
+  var rows = Array.prototype.filter.call(
+    document.querySelectorAll('tbody tr'),
+    function (r) { return !r.classList.contains('sec'); }
+  );
+  var data = rows.map(function (r, i) {
+    var vals = r.querySelectorAll('td.val');
+    var td = document.createElement('td');
+    td.className = 'qtd';
+    var inp = document.createElement('input');
+    inp.type = 'number';
+    inp.min = '0';
+    var saved = null;
+    try { saved = localStorage.getItem('vinhos-qtd-' + i); } catch (e) {}
+    inp.value = saved !== null ? saved : '1';
+    td.appendChild(inp);
+    r.appendChild(td);
+    inp.addEventListener('input', function () {
+      try { localStorage.setItem('vinhos-qtd-' + i, inp.value); } catch (e) {}
+      calc();
+    });
+    return {
+      novo: parse(vals[0].textContent),
+      meu: parse(vals[1].textContent),
+      leilao: parse(vals[2].textContent),
+      inp: inp
+    };
+  });
+  function calc() {
+    var t = { novo: [0, 0], meu: [0, 0], leilao: [0, 0] };
+    data.forEach(function (d) {
+      var q = Math.max(0, parseInt(d.inp.value, 10) || 0);
+      ['novo', 'meu', 'leilao'].forEach(function (k) {
+        t[k][0] += d[k][0] * q;
+        t[k][1] += d[k][1] * q;
+      });
+    });
+    nums[0].textContent = fmt(t.meu[0]) + ' a ' + fmt(t.meu[1]);
+    nums[1].textContent = fmt(t.leilao[0]) + ' a ' + fmt(t.leilao[1]);
+    nums[2].textContent = fmt(t.novo[0]) + ' a ' + fmt(t.novo[1]);
+  }
+  calc();
+});
+</script>
 </body>
 </html>
