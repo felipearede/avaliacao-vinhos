@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Avaliação da Coleção de Vinhos</title>
+<style>
+  :root {
+    --bg: #faf7f2; --card: #ffffff; --text: #2a2320; --muted: #6b5f58;
+    --line: #e6ddd3; --head: #f0e9df;
+    --verde: #1a7a4a; --verde-bg: #e8f5ee;
+    --ambar: #9a6b00; --ambar-bg: #fdf3dc;
+    --cinza: #666; --cinza-bg: #efefef;
+    --destaque: #7a1f2b;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1c1814; --card: #262019; --text: #ece5dd; --muted: #b0a396;
+      --line: #3a322a; --head: #2f2820;
+      --verde: #5dd695; --verde-bg: #12301f;
+      --ambar: #ffce6b; --ambar-bg: #382c10;
+      --cinza: #aaa; --cinza-bg: #2e2e2e;
+      --destaque: #ff8a96;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: "Segoe UI", system-ui, sans-serif;
+    background: var(--bg); color: var(--text);
+    margin: 0; padding: 24px; font-size: 16px; line-height: 1.55;
+  }
+  .wrap { max-width: 1240px; margin: 0 auto; }
+  h1 { font-size: 1.7rem; margin: 0 0 4px; }
+  .sub { color: var(--muted); margin: 0 0 20px; }
+  .cards { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 22px; }
+  .card {
+    background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+    padding: 14px 20px; flex: 1 1 200px; min-width: 200px;
+  }
+  .card .num { font-size: 1.5rem; font-weight: 700; }
+  .card .lbl { color: var(--muted); font-size: .88rem; }
+  .avisos {
+    background: var(--ambar-bg); border: 1px solid var(--line); border-radius: 12px;
+    padding: 14px 20px; margin-bottom: 26px;
+  }
+  .avisos strong { color: var(--ambar); }
+  .avisos ul { margin: 8px 0 0; padding-left: 20px; }
+  .avisos li { margin-bottom: 4px; }
+  table { width: 100%; border-collapse: collapse; background: var(--card); border-radius: 12px; overflow: hidden; }
+  .tblbox { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; margin-bottom: 30px; }
+  th {
+    background: var(--head); text-align: left; padding: 10px 12px;
+    font-size: .82rem; text-transform: uppercase; letter-spacing: .04em; color: var(--muted);
+  }
+  td { padding: 12px; border-top: 1px solid var(--line); vertical-align: top; }
+  tr.sec td {
+    background: var(--head); font-weight: 700; font-size: 1rem; padding: 10px 12px;
+  }
+  td.foto { width: 118px; }
+  td.foto img {
+    width: 106px; height: 140px; object-fit: cover; border-radius: 8px; display: block;
+    border: 1px solid var(--line);
+  }
+  .nome { font-weight: 700; font-size: 1.02rem; }
+  .origem { color: var(--muted); font-size: .86rem; margin-top: 2px; }
+  .badge {
+    display: inline-block; font-size: .76rem; padding: 2px 9px; border-radius: 999px;
+    margin-top: 6px; font-weight: 600;
+  }
+  .b-ok  { background: var(--verde-bg); color: var(--verde); }
+  .b-mid { background: var(--ambar-bg); color: var(--ambar); }
+  .b-bad { background: var(--cinza-bg); color: var(--cinza); }
+  td.desc { font-size: .9rem; color: var(--muted); max-width: 340px; min-width: 240px; }
+  td.val { white-space: nowrap; font-variant-numeric: tabular-nums; }
+  td.val .v { font-weight: 700; }
+  td.val.meu .v { color: var(--destaque); font-size: 1.05rem; }
+  .obs { font-size: .8rem; color: var(--muted); }
+  .rodape { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 18px 22px; }
+  .rodape h2 { font-size: 1.1rem; margin: 0 0 8px; }
+  .rodape ul { margin: 6px 0 14px; padding-left: 20px; }
+  a { color: inherit; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>🍷 Avaliação da coleção de vinhos</h1>
+<p class="sub">57 fotos analisadas · ~53 garrafas identificadas · preços pesquisados em 22/07/2026 (leilões, Wine-Searcher, Catawiki, Mercado Livre, garrafeiras)</p>
+
+<div class="cards">
+  <div class="card"><div class="num">≈ R$ 5.000 a 11.000</div><div class="lbl">💰 A coleção NO ESTADO ATUAL: venda direta como colecionável/decoração (anúncios e lotes)</div></div>
+  <div class="card"><div class="num">≈ R$ 7.500 a 17.000</div><div class="lbl">🔨 VENDENDO EM LEILÃO: teto teórico se cada peça for bem anunciada e alcançar o máximo. Na prática, espere algo entre o valor do estado atual e este teto</div></div>
+  <div class="card"><div class="num">≈ R$ 3.400 a 5.300</div><div class="lbl">🛒 COMPRAR TUDO NOVO HOJE: soma dos equivalentes atuais em loja. Não inclui as marcas extintas (Duvalier, Bergerac, garrafão de palha etc.), que não têm versão nova</div></div>
+  <div class="card"><div class="num">Cousiño Macul 1975</div><div class="lbl">🏆 Item mais valioso: 2 garrafas, R$ 250 a 550 cada (teto de leilão R$ 900 cada)</div></div>
+</div>
+
+<div class="avisos">
+  <strong>⚠️ Leia antes de olhar os preços</strong>
+  <ul>
+    <li><b>O conteúdo da maioria está mesmo estragado.</b> Vinho de mesa guardado décadas sem climatização oxida. Vários já mostram sinal claro: líquido cor âmbar/acastanhado, nível baixo, cápsula corroída. O valor deles é a <b>garrafa como peça de coleção/decoração</b>, não a bebida.</li>
+    <li><b>Exceções que aguentam o tempo:</b> destilados (brandy, calvados) e fortificados (Porto, Jerez, Dubonnet). Esses ainda podem estar bons e valem como bebida.</li>
+    <li><b>Coluna "teto leilão":</b> é o que um exemplar igual, bem conservado e bem anunciado, alcança. O seu chega perto do teto só se a garrafa se apresentar bem (rótulo, nível, lacre).</li>
+    <li>Estimativas feitas por foto. Para os itens de topo (seção verde), vale uma avaliação presencial de leiloeiro antes de vender.</li>
+  </ul>
+</div>
+
+<div class="tblbox">
+<table>
+<thead>
+<tr><th>Foto</th><th>Vinho</th><th>Descrição</th><th>Novo hoje</th><th>O seu, como está</th><th>Teto leilão</th></tr>
+</thead>
+<tbody>
+
+<tr class="sec"><td colspan="6">🟢 VALE VENDER INDIVIDUALMENTE (R$ 150+ no estado atual)</td></tr>
+
+<tr>
+  <td class="foto"><a href="WhatsApp Image 2026-07-22 at 11.19.52 AM (3).jpeg" target="_blank"><img src="WhatsApp Image 2026-07-22 at 11.19.52 AM (3).jpeg" alt="Cousiño Macul"></a></td>
+  <td><div class="nome">Cousiño Macul "Antiguas Reservas" 1975 · 2 garrafas</div><div class="origem">Cabernet Sauvignon · Vale do Maipo, Chile</div><span class="badge b-ok">✅ rótulos limpos, cápsulas intactas</span></td>
+  <td class="desc">Linha topo de vinícola chilena fundada em 1856, mesmo corte de uvas desde 1927. O item mais cobiçado da coleção: marca respeitada e ainda em produção, safra de 51 anos.</td>
+  <td class="val"><span class="v">R$ 90–160</span></td>
+  <td class="val meu"><span class="v">R$ 250–550</span><div class="obs">por garrafa</div></td>
+  <td class="val"><span class="v">R$ 400–900</span></td>
+</tr>
+
+<tr>
+  <td class="foto"><a href="WhatsApp Image 2026-07-22 at 11.19.51 AM.jpeg" target="_blank"><img src="WhatsApp Image 2026-07-22 at 11.19.51 AM.jpeg" alt="Château Lacave"></a></td>
+  <td><div class="nome">Château Lacave "Vinho Velho do Museu" 1979</div><div class="origem">Família Carrau (tradição 1752) · Caxias do Sul, RS</div><span class="badge b-ok">✅ cera e etiqueta originais da marca</span></td>
+  <td class="desc">Único da coleção com mercado ativo e verificável: a linha "Velho do Museu" é vendida ATÉ HOJE como vinho envelhecido (safra 2004 custa R$ 208 no varejo). O seu é de 1979, bem mais raro. Há mais exemplares iguais ao fundo da foto: cada um vale isso.</td>
+  <td class="val"><span class="v">R$ 210–350</span></td>
+  <td class="val meu"><span class="v">R$ 350–800</span><div class="obs">por garrafa</div></td>
+  <td class="val"><span class="v">R$ 500–1.200</span></td>
+</tr>
+
+<tr>
+  <td class="foto"><a href="WhatsApp Image 2026-07-22 at 11.19.55 AM (1).jpeg" target="_blank"><img src="WhatsApp Image 2026-07-22 at 11.19.55 AM (1).jpeg" alt="Calvados Calingasta"></a></td>
+  <td><div class="nome">Calvados Calingasta Extra Añejo</div><div class="origem">Destilado · San Juan, Argentina</div><span class="badge b-ok">🥃 destilado: não estraga · garrafa cheia</span></td>
+  <td class="desc">Raridade histórica: a produção parou em 1975 e a Argentina foi proibida de usar o nome "Calvados" (denominação francesa protegida). Não existe mais nada igual sendo feito. Nível alto e rótulo bom.</td>
+  <td class="val"><span class="v">R$ 150–320</span><div class="obs">análogo</div></td>
+  <td class="val meu"><span class="v">R$ 350–800</span></td>
+  <td class="val"><span class="v">R$ 400–900</span></td>
+</tr>
+
+<tr>
+  <td class="foto"><a href="WhatsApp Image 2026-07-22 at 11.19.51 AM (2).jpeg" target="_blank"><img src="WhatsApp Image 2026-07-22 at 11.19.51 AM (2).jpeg" alt="Garrafão de palha antigo"></a></td>
+  <td><div class="nome">Garrafão de palha com selo sanitário antigo</div><div class="origem">Fortificado brasileiro · provável década de 1930/40</div><span class="badge b-mid">🏺 peça de antiguidade, marca perdida</span></td>
+  <td class="desc">O selo "Inspectoria do Serviço Sanitário de São Paulo" com ortografia antiga indica quase 90 anos de idade. Valor de antiguidade, não de bebida. É o item de estimativa mais incerta: leve a um leiloeiro de antiguidades.</td>
+  <td class="val"><span class="v">–</span></td>
+  <td class="val meu"><span class="v">R$ 150–400</span></td>
+  <td class="val"><span class="v">R$ 300–800</span></td>
+</tr>
+
+<tr>
+  <td class="foto"><a href="WhatsApp Image 2026-07-22 at 11.19.48 AM (2).jpeg" target="_blank"><img src="WhatsApp Image 2026-07-22 at 11.19.48 AM (2).jpeg" alt="Osborne Magno"></a></td>
+  <td><div class="nome">Osborne "Magno" Brandy de Jerez</div><div class="origem">Solera Reserva · Espanha (anos 80/90)</div><span class="badge b-ok">🥃 destilado: não estraga · cheia, lacrada</span></td>
+  <td class="desc">O brandy espanhol mais popular do mundo (o do touro). Garrafa antiga cheia e lacrada preserva praticamente todo o valor de bebida. Garrafas de época circulam em sites espanhóis de colecionismo.</td>
+  <td class="val"><span class="v">R$ 150–220</span></td>
+  <td class="val meu"><span class="v">R$ 200–400</span></td>
+  <td class="val"><span class="v">R$ 150–300</span></td>
+</tr>
+
+<tr>
+  <td class="foto"><a href="WhatsApp Image 2026-07-22 at 11.19.43 AM (2).jpeg" target="_blank"><img src="WhatsApp Image 2026-07-22 at 11.19.43 AM (2).jpeg" alt="Clos des Nobles"></a></td>
+  <td><div class="nome">Clos des Nobles Cabernet Franc · 2 garrafas (1973 e ~1980)</div><div class="origem">Osvaldo Peres · Bento Gonçalves, RS</div><span class="badge b-ok">✅ rótulos kraft numerados, nível alto</span></td>
+  <td class="desc">Vinícola pioneira da uva vinífera no Brasil. Rótulo de papel kraft com número de pipa e ano documenta o lote: isso autentica a peça e sobe o valor de colecionismo histórico nacional.</td>
+  <td class="val"><span class="v">R$ 20–35</span><div class="obs">linha atual Aurora</div></td>
+  <td class="val meu"><span class="v">R$ 150–350</span><div class="obs">por garrafa</div></td>
+  <td class="val"><span class="v">R$ 220–600</span></td>
+</tr>
+
+<tr>
+  <td class="foto"><a href="WhatsApp Image 2026-07-22 at 11.19.49 AM (1).jpeg" target="_blank"><img src="WhatsApp Image 2026-07-22 at 11.19.49 AM (1).jpeg" alt="San Felipe na caixa"></a></td>
+  <td><div class="nome">San Felipe branco na caixa de madeira</div><div class="origem">La Rural · Mendoza, Argentina (anos 70/80)</div><span class="badge b-mid">📦 valor está no conjunto caixa + garrafa</span></td>
+  <td class="desc">A garrafa "caramañola" (formato oval, criada em 1934 pela família Rutini) é objeto de colecionador reconhecido na Argentina, com categoria própria nos marketplaces de lá. A caixa oval de madeira completa o conjunto.</td>
+  <td class="val"><span class="v">R$ 15–25</span></td>
+  <td class="val meu"><span class="v">R$ 150–350</span></td>
+  <td class="val"><span class="v">R$ 200–450</span></td>
+</tr>
+
+<tr>
+  <td class="foto"><a href="WhatsApp Image 2026-07-22 at 11.19.45 AM (2).jpeg" target="_blank"><img src="WhatsApp Image 2026-07-22 at 11.19.45 AM (2).jpeg" alt="Granja União"></a></td>
+  <td><div class="nome">Granja União "Primícias" Cabernet Sauvignon</div><div class="origem">Serra Gaúcha, Brasil (anos 70/80)</div><span class="badge b-ok">✅ rótulo legível, cápsula dourada íntegra</span></td>
+  <td class="desc">Marca de 1931, pioneira do primeiro varietal brasileiro e ainda existente (facilita autenticar). A narrativa histórica mais forte entre os nacionais da coleção.</td>
+  <td class="val"><span class="v">R$ 25–40</span></td>
+  <td class="val meu"><span class="v">R$ 150–300</span></td>
+  <td class="val"><span class="v">R$ 200–500</span></td>
+</tr>
+
+<tr>
+  <td class="foto"><a href="WhatsApp Image 2026-07-22 at 11.19.53 AM (4).jpeg" target="_blank"><img src="WhatsApp Image 2026-07-22 at 11.19.53 AM (4).jpeg" alt="Affentaler"></a></td>
+  <td><div class="nome">Affentaler Spätburgunder 1978 (garrafa do macaco)</div><div class="origem">Pinot Noir · Baden, Alemanha</div><span class="badge b-ok">🐒 escultura de macaco preservada</span></td>
+  <td class="desc">A garrafa-escultura com macaco de metal abraçando o gargalo tem mercado ativo e verificável no eBay (vendem até vazias, por dezenas de dólares). O valor é a garrafa, não o vinho.</td>
+  <td class="val"><span class="v">R$ 65–90</span></td>
+  <td class="val meu"><span class="v">R$ 150–350</span></td>
+  <td class="val"><span class="v">R$ 140–330</span></td>
+</tr>
+
+<tr class="sec"><td colspan="6">🟡 VALOR MODERADO (R$ 50 a 150 no estado atual) · melhor vender em lotes temáticos</td></tr>
+
+<tr>
+  <td class="foto"><a href="WhatsApp Image 2026-07-22 at 11.19.54 AM (3).jpeg" target="_blank"><img src="WhatsApp Image 2026-07-22 at 11.19.54 AM (3).jpeg" alt="Tio Quinto"></a></td>
+  <td><div class="nome">Tío Quinto "Jerez" Vino Generoso Seco</div><div class="origem">Peñaflor · Argentina</div><span class="badge b-ok">🍷 fortificado: aguenta o tempo</span></td>
+  <td class="desc">Fortificado histórico do grupo Peñaflor, marca aparentemente descontinuada. Por ser tipo Jerez, o risco de estar estragado é baixo.</td>
+  <td class="val"><span class="v">R$ 40–90</span></td>
+  <td class="val meu"><span class="v">R$ 120–280</span></td>
+  <td class="val"><span class="v">R$ 150–350</span></td>
+</tr>
+
+<tr>
+  <td class="foto"><a href="WhatsApp Image 2026-07-22 at 11.19.47 AM (2).jpeg" target="_blank"><img src="WhatsApp Image 2026-07-22 at 11.19.47 AM (2).jpeg" alt="Bergerac"></a></td>
+  <td><div class="nome">Bergerac tinto (garrafa na juta com lacre de cera)</div><div class="origem">Vinhas Santa Rosa · Caxias do Sul, RS</div><span class="badge b-mid">🎁 embalagem de luxo da época, completa</span></td>
+  <td class="desc">Apresentação de presente dos anos 70/80: juta, cera vermelha e etiqueta pendurada intactas. O apelo visual rende mais que garrafa lisa em anúncio de decoração vintage.</td>
+  <td class="val"><span class="v">–</span></td>
+  <td class="val meu"><span class="v">R$ 120–250</span></td>
+  <td class="val"><span class="v">R$ 150–350</span></td>
+</tr>
+
+<tr>
+  <td class="foto"><a href="WhatsApp Image 2026-07-22 at 11.19.43 AM (1).jpeg" target="_blank"><img src="WhatsApp Image 2026-07-22 at 11.19.43 AM (1).jpeg" alt="Torres Coronas"></a></td>
+  <td><div class="nome">Torres "Coronas" 1977</div><div class="origem">Penedès, Espanha</div><span class="badge b-mid">⚠️ rótulo manchado, selo 1977 preservado</span></td>
+  <td class="desc">Linha de entrada da famosa Torres (não confundir com o Gran Coronas Black Label, esse sim valioso). Aos 49 anos o vinho está oxidado; vale o rótulo de época.</td>
+  <td class="val"><span class="v">R$ 100–160</span></td>
+  <td class="val meu"><span class="v">R$ 100–220</span></td>
+  <td class="val"><span class="v">R$ 150–300</span></td>
+</tr>
+
+<tr>
+  <td class="foto"><a href="WhatsApp Image 2026-07-22 at 11.19.48 AM (1).jpeg" target="_blank"><img src="WhatsApp Image 2026-07-22 at 11.19.48 AM (1).jpeg" alt="Sandeman"></a></td>
+  <td><div class="nome">Sandeman Fine Ruby Port · 1 litro</div><div class="origem">Porto, Portugal (anos 70/80)</div><span class="badge b-ok">✅ selo IVP intacto, nível alto, rótulo limpo</span></td>
+  <td class="desc">Porto aguenta décadas. Garrafa mais bem conservada do lote e em formato raro de 1 litro. Por ser Ruby genérico (sem safra), vale menos que um Vintage; mesmo assim tem comprador.</td>
+  <td class="val"><span class="v">R$ 70–110</span></td>
+  <td class="val meu"><span class="v">R$ 90–180</span></td>
+  <td class="val"><span class="v">R$ 150–280</span></td>
+</tr>
+
+<tr>
+  <td class="foto"><a href="WhatsApp Image 2026-07-22 at 11.19.52 AM (1).jpeg" target="_blank"><img src="WhatsApp Image 2026-07-22 at 11.19.52 AM (1).jpeg" alt="Delor Médoc"></a></td>
+  <td><div class="nome">Delor Médoc 1978</div><div class="origem">Bordeaux, França</div><span class="badge b-ok">✅ rótulo íntegro · boa safra (1978)</span></td>
+  <td class="desc">Négociant bordelês tradicional (1881, ainda ativo) em uma das boas safras de Bordeaux. Entre os franceses, é o com melhor chance real de interesse de colecionador.</td>
+  <td class="val"><span class="v">R$ 50–80</span></td>
+  <td class="val meu"><span class="v">R$ 80–200</span></td>
+  <td class="val"><span class="v">R$ 150–350</span></td>
+</tr>
+
+<tr>
+  <td class="foto"><a href="WhatsApp Image 2026-07-22 at 11.19.47 AM (3).jpeg" target="_blank"><img src="WhatsApp Image 2026-07-22 at 11.19.47 AM (3).jpeg" alt="Eyzaguirre"></a></td>
+  <td><div class="nome">Vino de Eyzaguirre Cabernet</div><div class="origem">San Francisco de Mostazal, Chile (casa de 1879)</div><span class="badge b-mid">✅ juta e etiqueta originais</span></td>
+  <td class="desc">Vinícola ativa até hoje (a linha atual custa uns R$ 45–85). O gargalo de juta com etiqueta pendurada original agrega charme e autenticidade à peça.</td>
+  <td class="val"><span class="v">R$ 45–85</span></td>
+  <td class="val meu"><span class="v">R$ 80–200</span></td>
+  <td class="val"><span class="v">R$ 150–350</span></td>
+</tr>
+
+<tr>
+  <td class="foto"><a href="WhatsApp Image 2026-07-22 at 11.19.43 AM (3).jpeg" target="_blank"><img src="WhatsApp Image 2026-07-22 at 11.19.43 AM (3).jpeg" alt="Château Duvalier"></a></td>
+  <td><div class="nome">Château Duvalier Reserva Especial</div><div class="origem">Cia. Vinícola Rio-Grandense · Garibaldi, RS</div><span class="badge b-mid">🏛️ vinícola extinta em 1997</span></td>
+  <td class="desc">Um dos nacionais mais populares dos anos 70/80 (parceria com a Martini & Rossi). A empresa fechou, então só existem garrafas antigas; circula de fato em leilões de antiguidades brasileiros.</td>
+  <td class="val"><span class="v">–</span></td>
+  <td class="val meu"><span class="v">R$ 80–180</span></td>
+  <td class="val"><span class="v">R$ 100–250</span></td>
+</tr>
+
+<tr>
+  <td class="foto"><a href="WhatsApp Image 2026-07-22 at 11.19.44 AM (2).jpeg" target="_blank"><img src="WhatsApp Image 2026-07-22 at 11.19.44 AM (2).jpeg" alt="Schröder & Schÿler"></a></td>
+  <td><div class="nome">Schröder & Schÿler Bordeaux 1981 · 2 garrafas</div><div class="origem">Bordeaux, França</div><span class="badge b-ok">✅ nível alto, rótulos bons</span></td>
+  <td class="desc">Casa de négoce entre as mais antigas de Bordeaux (1739, ainda ativa). Safra mediana, mas conservação aparente boa. Dica: com 2 iguais, dá pra abrir uma pra testar e vender a outra.</td>
+  <td class="val"><span class="v">R$ 55–85</span></td>
+  <td class="val meu"><span class="v">R$ 70–160</span><div class="obs">por garrafa</div></td>
+  <td class="val"><span class="v">R$ 120–280</span></td>
+</tr>
+
+<tr>
+  <td class="foto"><a href="WhatsApp Image 2026-07-22 at 11.19.53 AM (2).jpeg" target="_blank"><img src="WhatsApp Image 2026-07-22 at 11.19.53 AM (2).jpeg" alt="Porta dos Cavaleiros"></a></td>
+  <td><div class="nome">Porta dos Cavaleiros Reserva (provável 1974)</div><div class="origem">Caves São João · Dão, Portugal</div><span class="badge b-mid">⚠️ rótulo sujo, mofo no gargalo</span></td>
+  <td class="desc">Tinto de guarda respeitado, de casa famosa por envelhecer vinhos de propósito. É a única garrafa de vinho de mesa da coleção com chance real de ainda estar bebível. O teto de leilão vale para exemplar bem guardado.</td>
+  <td class="val"><span class="v">R$ 80–150</span></td>
+  <td class="val meu"><span class="v">R$ 70–180</span></td>
+  <td class="val"><span class="v">R$ 200–450</span></td>
+</tr>
+
+<tr>
+  <td class="foto"><a href="WhatsApp Image 2026-07-22 at 11.19.48 AM.jpeg" target="_blank"><img src="WhatsApp Image 2026-07-22 at 11.19.48 AM.jpeg" alt="Châteauneuf-du-Pape"></a></td>
+  <td><div class="nome">Châteauneuf-du-Pape "Cachet d'Or" 1974</div><div class="origem">Maurice Granier (négociant) · Rhône, França</div><span class="badge b-mid">⚠️ mancha de umidade · medalhão de cera ok</span></td>
+  <td class="desc">Apelação mais nobre do Rhône Sul, mas engarrafamento comercial de négociant em ano mediano: vale muito menos que garrafa de château. O medalhão de cera intacto ajuda a autenticar.</td>
+  <td class="val"><span class="v">R$ 150–220</span></td>
+  <td class="val meu"><span class="v">R$ 50–150</span></td>
+  <td class="val"><span class="v">R$ 150–400</span></td>
+</tr>
+
+<tr>
+  <td class="foto"><a href="WhatsApp Image 2026-07-22 at 11.19.53 AM (1).jpeg" target="_blank"><img src="WhatsApp Image 2026-07-22 at 11.19.53 AM (1).jpeg" alt="Santa Teresa"></a></td>
+  <td><div class="nome">Viña Santa Teresa "Sangala" / "GranGala" 1973 · 3+ garrafas</div><div class="origem">Chile (exportação)</div><span class="badge b-ok">✅ rótulos pretos/dourados bem conservados</span></td>
+  <td class="desc">Vinícola chilena histórica (1860), marca provavelmente descontinuada. Os rótulos bonitos e a safra de 1973 dão apelo decorativo; mercado de nicho.</td>
+  <td class="val"><span class="v">R$ 40–80</span></td>
+  <td class="val meu"><span class="v">R$ 50–130</span><div class="obs">por garrafa</div></td>
+  <td class="val"><span class="v">R$ 100–250</span></td>
+</tr>
+
+<tr>
+  <td class="foto"><a href="WhatsApp Image 2026-07-22 at 11.19.50 AM.jpeg" target="_blank"><img src="WhatsApp Image 2026-07-22 at 11.19.50 AM.jpeg" alt="Bolla fiasco"></a></td>
+  <td><div class="nome">Bolla Valpolicella 1977 · fiasco de palha 1 L (vários!)</div><div class="origem">Verona, Itália</div><span class="badge b-mid">🧺 palha íntegra, cera intacta</span></td>
+  <td class="desc">O garrafão redondo envolto em palha é peça decorativa retrô clássica. O vinho era de consumo imediato, está passado; o objeto é o valor. Há vários iguais ao fundo da foto: some R$ 50–120 por cada.</td>
+  <td class="val"><span class="v">R$ 90–120</span></td>
+  <td class="val meu"><span class="v">R$ 50–120</span><div class="obs">por fiasco</div></td>
+  <td class="val"><span class="v">R$ 130–300</span></td>
+</tr>
+
+<tr>
+  <td class="foto"><a href="WhatsApp Image 2026-07-22 at 11.19.44 AM (1).jpeg" target="_blank"><img src="WhatsApp Image 2026-07-22 at 11.19.44 AM (1).jpeg" alt="Rhein Gold"></a></td>
+  <td><div class="nome">Rhein Gold Trocken (serigrafia no vidro)</div><div class="origem">Nacional "germanizado" · anos 70/80</div><span class="badge b-mid">🎨 texto pintado no vidro, não descasca</span></td>
+  <td class="desc">Vinho nacional com nome alemão pra parecer importado (moda da época). A serigrafia direto no vidro é mais rara que rótulo de papel e interessa a quem coleciona embalagem.</td>
+  <td class="val"><span class="v">–</span></td>
+  <td class="val meu"><span class="v">R$ 90–180</span></td>
+  <td class="val"><span class="v">R$ 120–250</span></td>
+</tr>
+
+<tr>
+  <td class="foto"><a href="WhatsApp Image 2026-07-22 at 11.19.54 AM (1).jpeg" target="_blank"><img src="WhatsApp Image 2026-07-22 at 11.19.54 AM (1).jpeg" alt="Siglo de Oro"></a></td>
+  <td><div class="nome">Siglo de Oro (Santa R...)</div><div class="origem">Provável Chile · rótulo com hacienda colonial</div><span class="badge b-mid">❓ identificação incompleta</span></td>
+  <td class="desc">Pode ser versão antiga da linha chilena da Santa Helena ou homônimo nacional. Confira no rótulo o país/importador pra refinar: se for a chilena antiga, fica na faixa indicada.</td>
+  <td class="val"><span class="v">R$ 35–55</span></td>
+  <td class="val meu"><span class="v">R$ 70–150</span></td>
+  <td class="val"><span class="v">R$ 100–200</span></td>
+</tr>
+
+<tr>
+  <td class="foto"><a href="WhatsApp Image 2026-07-22 at 11.19.42 AM (1).jpeg" target="_blank"><img src="WhatsApp Image 2026-07-22 at 11.19.42 AM (1).jpeg" alt="Gran Reserva Maximiano"></a></td>
+  <td><div class="nome">Gran Reserva Maximiano Cabernet</div><div class="origem">Provável Viña Errázuriz · Chile</div><span class="badge b-bad">⚠️ mancha vertical de vazamento antigo</span></td>
+  <td class="desc">Ligado à história de Maximiano Errázuriz (vinícola de 1870 que hoje faz o ícone "Don Maximiano"). A marca de vazamento indica perda de líquido e oxidação, o que derruba o valor real.</td>
+  <td class="val"><span class="v">R$ 70–150</span></td>
+  <td class="val meu"><span class="v">R$ 60–150</span></td>
+  <td class="val"><span class="v">R$ 150–320</span></td>
+</tr>
+
+<tr>
+  <td class="foto"><a href="WhatsApp Image 2026-07-22 at 11.19.50 AM (3).jpeg" target="_blank"><img src="WhatsApp Image 2026-07-22 at 11.19.50 AM (3).jpeg" alt="Messias Rosé"></a></td>
+  <td><div class="nome">Messias Rosé (1 a 2 garrafas)</div><div class="origem">Caves Messias · Portugal</div><span class="badge b-ok">✅ bom aspecto</span></td>
+  <td class="desc">Rosé em garrafa estilo Mateus dos anos 70/80, entre as mais bem conservadas do lote. Âncora de preço real: Mateus antigo vende por ~R$ 58–115 em garrafeira portuguesa.</td>
+  <td class="val"><span class="v">R$ 45–80</span></td>
+  <td class="val meu"><span class="v">R$ 60–120</span><div class="obs">por garrafa</div></td>
+  <td class="val"><span class="v">R$ 70–150</span></td>
+</tr>
+
+<tr>
+  <td class="foto"><a href="WhatsApp Image 2026-07-22 at 11.19.45 AM (3).jpeg" target="_blank"><img src="WhatsApp Image 2026-07-22 at 11.19.45 AM (3).jpeg" alt="San Francisco Wine Merchants"></a></td>
+  <td><div class="nome">San Francisco Wine Merchants "Tipo Chablis"</div><div class="origem">Nacional, estilo californiano · anos 80</div><span class="badge b-ok">✅ bom estado</span></td>
+  <td class="desc">Branco nacional com nome em inglês pra parecer importado. Sem registro da marca em lugar nenhum; vale como curiosidade vintage bem apresentada.</td>
+  <td class="val"><span class="v">–</span></td>
+  <td class="val meu"><span class="v">R$ 60–120</span></td>
+  <td class="val"><span class="v">R$ 80–180</span></td>
+</tr>
+
+<tr>
+  <td class="foto"><a href="WhatsApp Image 2026-07-22 at 11.19.52 AM (2).jpeg" target="_blank"><img src="WhatsApp Image 2026-07-22 at 11.19.52 AM (2).jpeg" alt="Concha y Toro"></a></td>
+  <td><div class="nome">Concha y Toro "Vino Reservado" 1978 e 1979 · 2 garrafas</div><div class="origem">Chile</div><span class="badge b-ok">✅ rótulos bem conservados</span></td>
+  <td class="desc">Linha de entrada da maior vinícola chilena, ainda vendida hoje por ~R$ 25–35. Nome reconhecido, mas nunca foi linha de prestígio: prêmio de idade modesto.</td>
+  <td class="val"><span class="v">R$ 25–35</span></td>
+  <td class="val meu"><span class="v">R$ 40–100</span><div class="obs">por garrafa</div></td>
+  <td class="val"><span class="v">R$ 70–180</span></td>
+</tr>
+
+<tr>
+  <td class="foto"><a href="WhatsApp Image 2026-07-22 at 11.19.54 AM.jpeg" target="_blank"><img src="WhatsApp Image 2026-07-22 at 11.19.54 AM.jpeg" alt="Vinho Fino do Douro"></a></td>
+  <td><div class="nome">Vinho Fino do Douro "Colheita Particular 1975"</div><div class="origem">Engarrafado em 1988 · Douro, Portugal</div><span class="badge b-mid">❓ sem produtor identificado</span></td>
+  <td class="desc">Garrafeira particular portuguesa (engarrafado artesanalmente). Sem marca não há como autenticar, o que limita o interesse mesmo sendo de ano decente.</td>
+  <td class="val"><span class="v">–</span></td>
+  <td class="val meu"><span class="v">R$ 50–120</span></td>
+  <td class="val"><span class="v">R$ 100–250</span></td>
+</tr>
+
+<tr>
+  <td class="foto"><a href="WhatsApp Image 2026-07-22 at 11.19.46 AM.jpeg" target="_blank"><img src="WhatsApp Image 2026-07-22 at 11.19.46 AM.jpeg" alt="Maximiner Klosterlay"></a></td>
+  <td><div class="nome">Maximiner Klosterlay Riesling Spätlese 1985</div><div class="origem">Mosel, Alemanha</div><span class="badge b-mid">rótulo ok, engarrafador comercial</span></td>
+  <td class="desc">O vinhedo (Maximiner Klosterlay) é real e respeitado até hoje, mas esta garrafa é de engarrafador de exportação, não de produtor artesanal. Melhor alemão "de verdade" do lote.</td>
+  <td class="val"><span class="v">R$ 60–100</span></td>
+  <td class="val meu"><span class="v">R$ 50–100</span></td>
+  <td class="val"><span class="v">R$ 70–130</span></td>
+</tr>
+
+<tr>
+  <td class="foto"><a href="WhatsApp Image 2026-07-22 at 11.19.45 AM.jpeg" target="_blank"><img src="WhatsApp Image 2026-07-22 at 11.19.45 AM.jpeg" alt="Josef Friederich Nahe"></a></td>
+  <td><div class="nome">Josef Friederich Nahe Kabinett 1982 · LOTE de 4–5</div><div class="origem">Nahe, Alemanha</div><span class="badge b-ok">✅ conjunto fechado bem conservado</span></td>
+  <td class="desc">Kabinett de entrada, mas um conjunto de 4–5 garrafas idênticas sobreviver junto é raro: vende melhor como lote fechado do que uma a uma.</td>
+  <td class="val"><span class="v">R$ 45–70</span></td>
+  <td class="val meu"><span class="v">R$ 250–450</span><div class="obs">o lote todo</div></td>
+  <td class="val"><span class="v">R$ 50–90</span><div class="obs">por garrafa</div></td>
+</tr>
+
+<tr>
+  <td class="foto"><a href="WhatsApp Image 2026-07-22 at 11.19.49 AM.jpeg" target="_blank"><img src="WhatsApp Image 2026-07-22 at 11.19.49 AM.jpeg" alt="Chablis Servin"></a></td>
+  <td><div class="nome">Domaine Servin Chablis 1er Cru "Vaillons" 2002</div><div class="origem">Borgonha, França</div><span class="badge b-mid">⚠️ branco de 24 anos sem climatização</span></td>
+  <td class="desc">O produtor mais respeitado da coleção e excelente safra... mas branco é o que pior aguenta calor. Se tivesse sido bem guardado valeria R$ 300–500. Abra pra testar antes de tentar vender como vinho fino.</td>
+  <td class="val"><span class="v">R$ 210–240</span></td>
+  <td class="val meu"><span class="v">R$ 40–110</span></td>
+  <td class="val"><span class="v">R$ 300–500</span><div class="obs">se estiver bom</div></td>
+</tr>
+
+<tr class="sec"><td colspan="6">⚪ VALOR DECORATIVO (até ~R$ 60) · vender em lote único "garrafas antigas de coleção"</td></tr>
+
+<tr>
+  <td class="foto"><a href="WhatsApp Image 2026-07-22 at 11.19.55 AM.jpeg" target="_blank"><img src="WhatsApp Image 2026-07-22 at 11.19.55 AM.jpeg" alt="Dubonnet"></a></td>
+  <td><div class="nome">Dubonnet (aperitivo)</div><div class="origem">França · anos 70/80</div><span class="badge b-mid">🍷 fortificado, rótulo vintage com gato</span></td>
+  <td class="desc">Aperitivo fortificado famoso desde 1846; rótulos antigos interessam a colecionador de design/publicidade. Venda real comparável: ~R$ 65 em leilão de 2024.</td>
+  <td class="val"><span class="v">R$ 85–100</span></td>
+  <td class="val meu"><span class="v">R$ 40–90</span></td>
+  <td class="val"><span class="v">R$ 60–150</span></td>
+</tr>
+
+<tr>
+  <td class="foto"><a href="WhatsApp Image 2026-07-22 at 11.19.46 AM (1).jpeg" target="_blank"><img src="WhatsApp Image 2026-07-22 at 11.19.46 AM (1).jpeg" alt="Almadén Riesling"></a></td>
+  <td><div class="nome">Almadén (Califórnia) · 3 garrafas</div><div class="origem">Riesling 1979, Cabernet 1978, "Champagne" Blanc de Blancs</div><span class="badge b-bad">⚠️ duas com marca de vazamento</span></td>
+  <td class="desc">Vinícola histórica dos EUA que virou marca de garrafão barato; garrafas antigas valem por nostalgia. A Riesling (rótulo bom, sem vazamento) é a melhor das três.</td>
+  <td class="val"><span class="v">R$ 35–55</span></td>
+  <td class="val meu"><span class="v">R$ 20–80</span><div class="obs">por garrafa</div></td>
+  <td class="val"><span class="v">R$ 60–150</span></td>
+</tr>
+
+<tr>
+  <td class="foto"><a href="WhatsApp Image 2026-07-22 at 11.19.47 AM.jpeg" target="_blank"><img src="WhatsApp Image 2026-07-22 at 11.19.47 AM.jpeg" alt="Katz Wein"></a></td>
+  <td><div class="nome">Katz Wein · Gold Wein (nacionais "germanizados")</div><div class="origem">Vinícola Aurora e similares · anos 80</div><span class="badge b-bad">Gold Wein com rótulo rasgado</span></td>
+  <td class="desc">Katz Wein confirmado como nacional (Aurora, 1986) com anúncio real a ~R$ 45; já apareceu em leilão de antiguidades junto com marcas irmãs. Gold Wein vale menos pelo rótulo rasgado.</td>
+  <td class="val"><span class="v">R$ 25–40</span></td>
+  <td class="val meu"><span class="v">R$ 20–80</span><div class="obs">por garrafa</div></td>
+  <td class="val"><span class="v">R$ 40–120</span></td>
+</tr>
+
+<tr>
+  <td class="foto"><a href="WhatsApp Image 2026-07-22 at 11.19.53 AM.jpeg" target="_blank"><img src="WhatsApp Image 2026-07-22 at 11.19.53 AM.jpeg" alt="Don Valentín"></a></td>
+  <td><div class="nome">Don Valentín · "Don Manuel" (2 garrafas)</div><div class="origem">Argentina / Chile</div><span class="badge b-bad">⚠️ cápsula manchada no Don Valentín</span></td>
+  <td class="desc">Don Valentín Lacrado (Bodegas Bianchi) é produzido sem parar desde 1965: garrafa antiga não é rara, vale nostalgia. O "Don Manuel" segue sem identificação completa.</td>
+  <td class="val"><span class="v">R$ 10–70</span></td>
+  <td class="val meu"><span class="v">R$ 30–100</span><div class="obs">por garrafa</div></td>
+  <td class="val"><span class="v">R$ 60–180</span></td>
+</tr>
+
+<tr>
+  <td class="foto"><a href="WhatsApp Image 2026-07-22 at 11.19.48 AM (3).jpeg" target="_blank"><img src="WhatsApp Image 2026-07-22 at 11.19.48 AM (3).jpeg" alt="Casal do Ouro"></a></td>
+  <td><div class="nome">Casal do Ouro Adamado</div><div class="origem">Portugal · anos 70/80</div><span class="badge b-mid">✅ aspecto razoável</span></td>
+  <td class="desc">Branco doce de marca pequena, provavelmente descontinuada; sem registro em base nenhuma. Estimativa por analogia com brancos portugueses antigos.</td>
+  <td class="val"><span class="v">R$ 40–60</span></td>
+  <td class="val meu"><span class="v">R$ 50–100</span></td>
+  <td class="val"><span class="v">R$ 60–120</span></td>
+</tr>
+
+<tr>
+  <td class="foto"><a href="WhatsApp Image 2026-07-22 at 11.19.49 AM (3).jpeg" target="_blank"><img src="WhatsApp Image 2026-07-22 at 11.19.49 AM (3).jpeg" alt="Gatão"></a></td>
+  <td><div class="nome">Gatão Vinho Verde · 2 (garrafa + jarra com alça)</div><div class="origem">Borges · Portugal</div><span class="badge b-bad">⚠️ jarra: líquido acastanhado = oxidado</span></td>
+  <td class="desc">Marca tradicional; a jarra de vidro com alça é formato antigo com apelo decorativo próprio. O conteúdo da jarra está visivelmente oxidado.</td>
+  <td class="val"><span class="v">R$ 60–68</span></td>
+  <td class="val meu"><span class="v">R$ 40–100</span><div class="obs">o par</div></td>
+  <td class="val"><span class="v">R$ 80–200</span></td>
+</tr>
+
+<tr>
+  <td class="foto"><a href="WhatsApp Image 2026-07-22 at 11.19.50 AM (2).jpeg" target="_blank"><img src="WhatsApp Image 2026-07-22 at 11.19.50 AM (2).jpeg" alt="Côtes-du-Rhône"></a></td>
+  <td><div class="nome">Franceses simples · 3 garrafas</div><div class="origem">Côtes-du-Rhône 1977 · "Marquis" Vin de Table · San Michel rosé</div><span class="badge b-bad">⚠️ rótulos manchados/desbotados</span></td>
+  <td class="desc">Vinhos de mesa franceses de consumo corrente, sem mercado secundário. Rótulos danificados eliminam até o apelo decorativo maior; valor simbólico.</td>
+  <td class="val"><span class="v">R$ 30–85</span></td>
+  <td class="val meu"><span class="v">R$ 15–70</span><div class="obs">por garrafa</div></td>
+  <td class="val"><span class="v">R$ 20–150</span></td>
+</tr>
+
+<tr>
+  <td class="foto"><a href="WhatsApp Image 2026-07-22 at 11.19.56 AM (1).jpeg" target="_blank"><img src="WhatsApp Image 2026-07-22 at 11.19.56 AM (1).jpeg" alt="Porca de Murça"></a></td>
+  <td><div class="nome">Portugueses oxidados · 5 garrafas</div><div class="origem">Porca de Murça ×2 · Grandjó · Calamares · Real Vinícola s/ rótulo</div><span class="badge b-bad">❌ líquido âmbar, nível baixo, cápsulas corroídas</span></td>
+  <td class="desc">Brancos e verdes com oxidação visível confirmada: cápsula corroída, nível baixo, cor acastanhada. Conteúdo perdido; sobra a garrafa antiga como decoração.</td>
+  <td class="val"><span class="v">R$ 48–135</span></td>
+  <td class="val meu"><span class="v">R$ 20–60</span><div class="obs">por garrafa</div></td>
+  <td class="val"><span class="v">R$ 60–250</span><div class="obs">se estivesse bom</div></td>
+</tr>
+
+<tr>
+  <td class="foto"><a href="WhatsApp Image 2026-07-22 at 11.19.42 AM.jpeg" target="_blank"><img src="WhatsApp Image 2026-07-22 at 11.19.42 AM.jpeg" alt="Liebfraumilch"></a></td>
+  <td><div class="nome">Alemães comuns · 4 garrafas</div><div class="origem">Liebfraumilch 1989 e 1990 · Zenzen Riesling 1980 · Kurfürstenhof 1980</div><span class="badge b-bad">produção em massa, sem colecionismo</span></td>
+  <td class="desc">Liebfraumilch e QbA de engarrafador industrial: o símbolo do vinho alemão barato de exportação dos anos 80. Sem mercado de colecionador; curiosidade de prateleira.</td>
+  <td class="val"><span class="v">R$ 40–90</span></td>
+  <td class="val meu"><span class="v">R$ 20–80</span><div class="obs">por garrafa</div></td>
+  <td class="val"><span class="v">R$ 40–100</span></td>
+</tr>
+
+</tbody>
+</table>
+</div>
+
+<div class="rodape">
+  <h2>💡 Onde e como vender</h2>
+  <ul>
+    <li><b>Itens da seção verde:</b> anúncio individual com fotos boas. Leilões de antiguidades brasileiros que já vendem garrafas antigas: Ana Clara Leilões, Bonequinha de Luxo, Márcio Pinho, Douro Leilões. Alternativa: Mercado Livre / Enjoei na categoria colecionáveis.</li>
+    <li><b>Seção amarela:</b> lotes temáticos rendem mais que unidade ("lote vinhos chilenos anos 70", "lote alemães vintage"). Catawiki (leilão internacional) aceita bebidas antigas e alcança colecionador europeu.</li>
+    <li><b>Seção branca:</b> um lote único "coleção de garrafas antigas para decoração" no Mercado Livre / OLX. Bares e restaurantes de decoração vintage compram esse tipo de lote.</li>
+    <li><b>Regra de ouro dos anúncios:</b> venda sempre como "garrafa de coleção, conteúdo sem garantia de consumo". É o padrão dos leilões e evita problema com bebida imprópria.</li>
+    <li><b>Não jogue fora nem "limpe" demais:</b> poeira e rótulo original valem mais que garrafa lavada. Só espane com pincel seco para fotografar.</li>
+  </ul>
+  <h2>📋 Como esta avaliação foi feita</h2>
+  <p class="obs">Identificação por leitura dos rótulos nas 57 fotos. Preços pesquisados em 22/07/2026 em Wine-Searcher, Catawiki, eBay, WineBid, Garrafeira Nacional (PT), todocoleccion (ES), Mercado Livre BR/AR e leilões brasileiros de antiguidades. Câmbio usado: R$ 5,50/US$ e R$ 6,00/€. Onde não havia venda registrada da garrafa exata, o valor foi estimado por analogia com itens equivalentes (indicado na descrição). Estimativas por foto não substituem avaliação presencial, principalmente para os itens de topo.</p>
+</div>
+
+</div>
+</body>
+</html>
